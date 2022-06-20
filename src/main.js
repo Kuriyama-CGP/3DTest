@@ -288,9 +288,6 @@ function createModel()
     model.addFaces(3, 4, 0);
     model.addFaces(4, 6, 5);
     model.addFaces(4, 7, 6);
-    
-    // 拡大縮小
-    model.resize(1.0, 1.0, 1.0);
 }
 
 // カメラを作成
