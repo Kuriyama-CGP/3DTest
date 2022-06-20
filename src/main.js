@@ -75,7 +75,7 @@ class Transform {
 
     // 拡大縮小
     resize(_x, _y, _z) {
-        this.scl = [_x, _y. _z];
+        this.scl = [_x, _y, _z];
     }
 
     // 平行移動行列
