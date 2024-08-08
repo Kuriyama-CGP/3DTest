@@ -80,9 +80,9 @@ class Transform {
 
     // 平行移動行列
     translateMat(_reverse = false) {
-        px = this.pos[0];
-        py = this.pos[1];
-        pz = this.pos[2];
+        let px = this.pos[0];
+        let py = this.pos[1];
+        let pz = this.pos[2];
 
         if (_reverse) {
             px = -px;
@@ -91,9 +91,9 @@ class Transform {
         }
 
         return [
-            1, 0, 0, this.pos[0],
-            0, 1, 0, this.pos[1],
-            0, 0, 1, this.pos[2],
+            1, 0, 0, px,
+            0, 1, 0, py,
+            0, 0, 1, pz,
             0, 0, 0, 1
         ];
     }
@@ -101,14 +101,14 @@ class Transform {
     // 回転行列
     rotateMat(_axis, _reverse = false) {
         const rad = this.rot[_axis] * Math.PI / 180;
-        c = Math.cos(rad);
-        s = Math.sin(rad);
+        let c = Math.cos(rad);
+        let s = Math.sin(rad);
 
         if (_reverse) {
             s = -s;
         }
 
-        // X軸
+        // X軸, Y軸, Z軸
         if (_axis === 0) {
             return [
                 1,  0,  0,  0,
@@ -117,9 +117,7 @@ class Transform {
                 0,  0,  0,  1
             ];
         }
-
-        // Y軸
-        if (_axis === 1) {
+        else if (_axis === 1) {
             return [
                 c,  0,  s,  0,
                 0,  1,  0,  0,
@@ -127,9 +125,7 @@ class Transform {
                 0,  0,  0,  1
             ];
         }
-
-        // Z軸
-        if (_axis === 2) {
+        else if (_axis === 2) {
             return [
                 c,  -s, 0,  0,
                 s,  c,  0,  0,
