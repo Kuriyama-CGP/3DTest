@@ -280,11 +280,11 @@ function vertsToWorldSpace()
 {
     for (i = 0; i < renderVerts.length; i++) {
         renderVerts[i] = model.verts[i].pos;
-        renderVerts[i] = multiplyMat(model.scaleMat(),     renderVerts[i]);
-        renderVerts[i] = multiplyMat(model.rotateMat(0),   renderVerts[i]);
-        renderVerts[i] = multiplyMat(model.rotateMat(1),   renderVerts[i]);
-        renderVerts[i] = multiplyMat(model.rotateMat(2),   renderVerts[i]);
-        renderVerts[i] = multiplyMat(model.translateMat(), renderVerts[i]);
+        renderVerts[i] = multiplyMat(model.scaleMat(),          renderVerts[i]);
+        renderVerts[i] = multiplyMat(model.rotateMat(0, false), renderVerts[i]);
+        renderVerts[i] = multiplyMat(model.rotateMat(1, false), renderVerts[i]);
+        renderVerts[i] = multiplyMat(model.rotateMat(2, false), renderVerts[i]);
+        renderVerts[i] = multiplyMat(model.translateMat(false), renderVerts[i]);
     }
 }
 
