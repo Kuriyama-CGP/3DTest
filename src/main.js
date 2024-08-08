@@ -80,94 +80,62 @@ class Transform {
 
     // 平行移動行列
     translateMat(_reverse = false) {
+        px = this.pos[0];
+        py = this.pos[1];
+        pz = this.pos[2];
+
         if (_reverse) {
-            return [
-                1, 0, 0, -this.pos[0],
-                0, 1, 0, -this.pos[1],
-                0, 0, 1, -this.pos[2],
-                0, 0, 0, 1
-            ];
+            px = -px;
+            py = -py;
+            pz = -pz;
         }
-        else {
-            return [
-                1, 0, 0, this.pos[0],
-                0, 1, 0, this.pos[1],
-                0, 0, 1, this.pos[2],
-                0, 0, 0, 1
-            ];
-        }
+
+        return [
+            1, 0, 0, this.pos[0],
+            0, 1, 0, this.pos[1],
+            0, 0, 1, this.pos[2],
+            0, 0, 0, 1
+        ];
     }
     
     // 回転行列
     rotateMat(_axis, _reverse = false) {
+        const rad = this.rot[_axis] * Math.PI / 180;
+        c = Math.cos(rad);
+        s = Math.sin(rad);
+
+        if (_reverse) {
+            s = -s;
+        }
 
         // X軸
         if (_axis === 0) {
-            const rad = this.rot[0] * Math.PI / 180;
-            const c = Math.cos(rad);
-            const s = Math.sin(rad);
-            if (_reverse) {
-                return [
-                    1,  0,  0,  0,
-                    0,  c,  s,  0,
-                    0,  -s, c,  0,
-                    0,  0,  0,  1
-                ];
-            }
-            else {
-                return [
-                    1,  0,  0,  0,
-                    0,  c,  -s, 0,
-                    0,  s,  c,  0,
-                    0,  0,  0,  1
-                ];
-            }
+            return [
+                1,  0,  0,  0,
+                0,  c,  -s, 0,
+                0,  s,  c,  0,
+                0,  0,  0,  1
+            ];
         }
 
         // Y軸
         if (_axis === 1) {
-            const rad = this.rot[1] * Math.PI / 180;
-            const c = Math.cos(rad);
-            const s = Math.sin(rad);
-            if (_reverse) {
-                return [
-                    c,  0,  -s, 0,
-                    0,  1,  0,  0,
-                    s,  0,  c,  0,
-                    0,  0,  0,  1
-                ];
-            }
-            else {
-                return [
-                    c,  0,  s,  0,
-                    0,  1,  0,  0,
-                    -s, 0,  c,  0,
-                    0,  0,  0,  1
-                ];
-            }
+            return [
+                c,  0,  s,  0,
+                0,  1,  0,  0,
+                -s, 0,  c,  0,
+                0,  0,  0,  1
+            ];
         }
 
         // Z軸
         if (_axis === 2) {
-            const rad = this.rot[2] * Math.PI / 180;
-            const c = Math.cos(rad);
-            const s = Math.sin(rad);
-            if (_reverse) {
-                return [
-                    c,  s,  0,  0,
-                    -s, c,  0,  0,
-                    0,  0,  1,  0,
-                    0,  0,  0,  1
-                ];
-            }
-            else {
-                return [
-                    c,  -s, 0,  0,
-                    s,  c,  0,  0,
-                    0,  0,  1,  0,
-                    0,  0,  0,  1
-                ];
-            }
+            return [
+                c,  -s, 0,  0,
+                s,  c,  0,  0,
+                0,  0,  1,  0,
+                0,  0,  0,  1
+            ];
         }
     }
 
